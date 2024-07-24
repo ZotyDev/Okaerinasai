@@ -1,6 +1,7 @@
 package dev.zoty.okaerinasai.db;
 
 import dev.zoty.okaerinasai.Okaerinasai;
+import dev.zoty.okaerinasai.Settings;
 import dev.zoty.okaerinasai.models.HomeModel;
 import dev.zoty.okaerinasai.models.PlayerModel;
 import org.bukkit.Bukkit;
@@ -20,9 +21,9 @@ public class Database {
             return this.connection;
         }
 
-        String url = "jdbc:mysql://localhost/okaerinasai";
-        String user = "root";
-        String password = "okaerinasai";
+        String url = Settings.getDbUrl();
+        String user = Settings.getDbUser();
+        String password = Settings.getDbPassword();
 
         this.connection = DriverManager.getConnection(url, user, password);
 

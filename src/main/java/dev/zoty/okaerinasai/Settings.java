@@ -15,6 +15,12 @@ public class Settings {
     private static final String DEFAULT_DEFAULT_HOME = "home";
     private static final String DEFAULT_WARP = "default-warp";
     private static final String DEFAULT_DEFAULT_WARP = "spawn";
+    private static final String DB_URL = "db-url";
+    private static final String DEFAULT_DB_URL = "default_db_url";
+    private static final String DB_USER = "db-user";
+    private static final String DEFAULT_DB_USER = "default_db_user";
+    private static final String DB_PASSWORD = "db-password";
+    private static final String DEFAULT_DB_PASSWORD = "default_db_password";
 
     public static float getHomeCooldown() {
         return ((Double) Okaerinasai.getInstance().getConfig().getDouble(HOME_COOLDOWN, DEFAULT_HOME_COOLDOWN)).floatValue();
@@ -52,5 +58,17 @@ public class Settings {
 
     public static String getDefaultWarp() {
         return Okaerinasai.getInstance().getConfig().getString(DEFAULT_WARP, DEFAULT_DEFAULT_WARP);
+    }
+
+    public static String getDbUrl() {
+        return Okaerinasai.getInstance().getConfig().getString(DB_URL, DEFAULT_DB_URL);
+    }
+
+    public static String getDbUser() {
+        return Okaerinasai.getInstance().getConfig().getString(DB_USER, DEFAULT_DB_USER);
+    }
+
+    public static String getDbPassword() {
+        return Okaerinasai.getInstance().getConfig().getString(DB_PASSWORD, DEFAULT_DB_PASSWORD);
     }
 }
