@@ -1,0 +1,17 @@
+name: Okaerinasai
+version: '1.0-SNAPSHOT'
+main: dev.zoty.okaerinasai.Okaerinasai
+api-version: '1.21'
+commands:
+  home:
+    description: Goes to a home, if none is specified goes to default home
+    usage: /<command> <home>
+  sethome:
+    description: Sets a new home, if <home> is not specified, sets the default home
+    usage: /<command> <home>
+  delhome:
+    description: Deletes a home
+    usage: /<command> <home>
+  homes:
+    description: List your homes
+    usage: /<command>

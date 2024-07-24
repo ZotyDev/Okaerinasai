@@ -1,0 +1,4 @@
+cooldown: 10
+particle: ENCHANT
+particle-amount: 20
+default-home: home
