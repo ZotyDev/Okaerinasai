@@ -27,19 +27,15 @@ public class WarpModel {
         statement.close();
     }
 
-    public static List<String> getWarpLabels() throws SQLException {
-        String sql = "SELECT label " +
-                "FROM warp;";
+    public static void deleteWarp(String label) throws SQLException {
+        String sql = "DELETE " +
+                "FROM warp " +
+                "WHERE label = ?;";
 
-        List<String> labels = new ArrayList<>();
         PreparedStatement statement = Okaerinasai.getDatabase().getConnection().prepareStatement(sql);
-        ResultSet resultSet = statement.executeQuery();
-        while (resultSet.next()) {
-            labels.add(resultSet.getString("label"));
-        }
-
+        statement.setString(1, label);
+        statement.executeUpdate();
         statement.close();
-        return labels;
     }
 
     public static Location getWarpLocation(String label) throws SQLException {
@@ -62,5 +58,35 @@ public class WarpModel {
             statement.close();
             return null;
         }
+    }
+
+    public static int getNumberOfWarps() throws SQLException {
+        String sql = "SELECT COUNT(*) " +
+                "FROM warp;";
+
+        PreparedStatement statement = Okaerinasai.getDatabase().getConnection().prepareStatement(sql);
+        ResultSet resultSet = statement.executeQuery();
+        if (resultSet.next()) {
+            int numberOfWarps = resultSet.getInt(1);
+            statement.close();
+            return numberOfWarps;
+        } else {
+            return 0;
+        }
+    }
+
+    public static List<String> getWarpLabels() throws SQLException {
+        String sql = "SELECT label " +
+                "FROM warp;";
+
+        List<String> labels = new ArrayList<>();
+        PreparedStatement statement = Okaerinasai.getDatabase().getConnection().prepareStatement(sql);
+        ResultSet resultSet = statement.executeQuery();
+        while (resultSet.next()) {
+            labels.add(resultSet.getString("label"));
+        }
+
+        statement.close();
+        return labels;
     }
 }

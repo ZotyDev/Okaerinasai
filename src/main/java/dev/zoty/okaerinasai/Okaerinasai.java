@@ -1,9 +1,6 @@
 package dev.zoty.okaerinasai;
 
-import dev.zoty.okaerinasai.commands.DelHomeCommand;
-import dev.zoty.okaerinasai.commands.HomeCommand;
-import dev.zoty.okaerinasai.commands.HomesCommand;
-import dev.zoty.okaerinasai.commands.SetHomeCommand;
+import dev.zoty.okaerinasai.commands.*;
 import dev.zoty.okaerinasai.db.Database;
 import dev.zoty.okaerinasai.listeners.PlayerJoinListener;
 import org.bukkit.plugin.PluginManager;
@@ -37,6 +34,11 @@ public final class Okaerinasai extends JavaPlugin {
         getCommand("sethome").setExecutor(new SetHomeCommand());
         getCommand("delhome").setExecutor(new DelHomeCommand());
         getCommand("homes").setExecutor(new HomesCommand());
+
+        getCommand("warp").setExecutor(new WarpCommand());
+        getCommand("setwarp").setExecutor(new SetWarpCommand());
+        getCommand("delwarp").setExecutor(new DelWarpCommand());
+        getCommand("warps").setExecutor(new WarpsCommand());
 
         getLogger().info("Successfully enabled!");
     }

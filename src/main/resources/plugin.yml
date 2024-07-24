@@ -10,8 +10,20 @@ commands:
     description: Sets a new home, if <home> is not specified, sets the default home
     usage: /<command> <home>
   delhome:
-    description: Deletes a home
+    description: Deletes a home, if none is specified deletes the default home
     usage: /<command> <home>
   homes:
     description: List your homes
+    usage: /<command>
+  warp:
+    description: Goes to a warp, if none is specified goes to default warp
+    usage: /<command> <warp>
+  setwarp:
+    description: Sets a new warp, if <warp> is not specified, sets the default warp
+    usage: /<command> <warp>
+  delwarp:
+    description: Deletes a warp, if none is specified deletes the default warp
+    usage: </command> <warp>
+  warps:
+    description: List warps
     usage: /<command>

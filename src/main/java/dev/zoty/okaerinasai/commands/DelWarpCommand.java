@@ -2,7 +2,7 @@ package dev.zoty.okaerinasai.commands;
 
 import dev.zoty.okaerinasai.Okaerinasai;
 import dev.zoty.okaerinasai.Settings;
-import dev.zoty.okaerinasai.models.HomeModel;
+import dev.zoty.okaerinasai.models.WarpModel;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -11,7 +11,7 @@ import org.bukkit.entity.Player;
 
 import java.sql.SQLException;
 
-public class DelHomeCommand implements CommandExecutor {
+public class DelWarpCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof Player player) {
@@ -22,26 +22,26 @@ public class DelHomeCommand implements CommandExecutor {
     }
 
     private boolean executeCommand(Player player, Command command, String label, String[] args) {
-        String homeLabel;
+        String warpLabel;
         if (args.length > 0) {
-            homeLabel = args[0];
+            warpLabel = args[0];
         } else {
-            homeLabel = Settings.getDefaultHome();
+            warpLabel = Settings.getDefaultWarp();
         }
 
         try {
-            int homeCount = HomeModel.getNumberOfHomes(player.getUniqueId().toString());
+            int warpCount = WarpModel.getNumberOfWarps();
 
-            if (homeCount == 0) {
-                player.sendMessage(ChatColor.RED + "You have no registered homes. Use \"/sethome <home>\" to register a new home.");
+            if (warpCount == 0) {
+                player.sendMessage(ChatColor.RED + "There are no registered warps.");
                 return true;
             }
 
-            HomeModel.deleteHome(homeLabel, player.getUniqueId().toString());
+            WarpModel.deleteWarp(warpLabel);
         } catch (SQLException e) {
-            player.sendMessage(ChatColor.RED + "Something went wrong while deleting your home, please try again. If the error persists, contact an Admin.");
+            player.sendMessage(ChatColor.RED + "Something went wrong while deleting the warp, please try again. If the error persists, contact an Admin.");
 
-            Okaerinasai.getInstance().getLogger().warning("Failed to delete " + homeLabel + " from " + player.getName() + "|" + player.getUniqueId());
+            Okaerinasai.getInstance().getLogger().warning("Failed to delete " + warpLabel);
             e.printStackTrace();
             return false;
         }

@@ -25,7 +25,7 @@ public class HomesCommand implements CommandExecutor {
                         String home = foundHomes.get(i);
                         message.append(ChatColor.GOLD).append(ChatColor.BOLD).append(home).append(ChatColor.RESET).append(", ");
                     }
-                    message.append(ChatColor.GOLD).append(ChatColor.BOLD).append(foundHomes.getLast()).append(ChatColor.RESET);
+                    message.append(ChatColor.GOLD).append(ChatColor.BOLD).append(foundHomes.getLast()).append(ChatColor.RESET).append("\n");
                     message.append("Type \"/home <home>\" to teleport to one of your homes.");
                     player.sendMessage(message.toString());
                 } else {

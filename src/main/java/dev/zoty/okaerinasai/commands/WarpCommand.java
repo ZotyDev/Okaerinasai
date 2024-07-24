@@ -2,7 +2,7 @@ package dev.zoty.okaerinasai.commands;
 
 import dev.zoty.okaerinasai.Okaerinasai;
 import dev.zoty.okaerinasai.Settings;
-import dev.zoty.okaerinasai.models.HomeModel;
+import dev.zoty.okaerinasai.models.WarpModel;
 import dev.zoty.okaerinasai.utils.Teleportation;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -15,7 +15,7 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.UUID;
 
-public class HomeCommand implements CommandExecutor {
+public class WarpCommand implements CommandExecutor {
     private final HashMap<UUID, Long> cooldown = new HashMap<>();
 
     @Override
@@ -28,24 +28,24 @@ public class HomeCommand implements CommandExecutor {
     }
 
     private boolean executeCommand(Player player, Command command, String label, String[] args) {
-        String homeLabel;
+        String warpLabel;
         if (args.length > 0) {
-            homeLabel = args[0];
+            warpLabel = args[0];
         } else {
-            homeLabel = Settings.getDefaultHome();
+            warpLabel = Settings.getDefaultWarp();
         }
 
         try {
-            int homeCount = HomeModel.getNumberOfHomes(player.getUniqueId().toString());
+            int warpCount = WarpModel.getNumberOfWarps();
 
-            if (homeCount == 0) {
-                player.sendMessage(ChatColor.RED + "You have no homes registered! Use \"/sethome <home>\" to register a new home.");
+            if (warpCount == 0) {
+                player.sendMessage(ChatColor.RED + "There are no registered warps.");
                 return true;
             }
 
-            Location location = HomeModel.getHomeLocation(homeLabel, player.getUniqueId().toString());
+            Location location = WarpModel.getWarpLocation(warpLabel);
             if (location == null) {
-                player.sendMessage(ChatColor.RED + "This home does not exist!");
+                player.sendMessage(ChatColor.RED + "This warp does not exist!");
                 return true;
             } else {
                 if (!this.cooldown.containsKey(player.getUniqueId())) {
@@ -56,22 +56,23 @@ public class HomeCommand implements CommandExecutor {
                     // Calculate difference in ms
                     long timeElapsed = System.currentTimeMillis() - this.cooldown.get(player.getUniqueId());
 
-                    // Gets the config cooldown in seconds and convert to milliseconds
-                    long cooldownInMillis = (long) (Settings.getHomeCooldown() * 1000);
+                    // Gets the config cooldown in seconds and convert it to milliseconds
+                    long cooldownInMillis = (long) (Settings.getWarpCooldown() * 1000);
                     if (timeElapsed >= cooldownInMillis) {
                         teleport(player, location);
 
                         this.cooldown.put(player.getUniqueId(), System.currentTimeMillis());
                     } else {
                         float remainingSeconds = ((float) (cooldownInMillis - timeElapsed)) / 1000.0F;
-                        player.sendMessage(String.format(ChatColor.YELLOW + "" + ChatColor.BOLD + "You can't use /home for another %.1f seconds", remainingSeconds));
+                        player.sendMessage(String.format(ChatColor.YELLOW + "" + ChatColor.BOLD + "You can't use /warp for another %.1f seconds", remainingSeconds));
                     }
                 }
             }
-        } catch (SQLException e) {
-            player.sendMessage(ChatColor.RED + "Something went wrong while going to your home, please try again. If the error persists, contact an Admin.");
 
-            Okaerinasai.getInstance().getLogger().warning("Failed to teleport " + player.getName() + "|" + player.getUniqueId() + " to " + homeLabel + " home");
+        } catch (SQLException e) {
+            player.sendMessage(ChatColor.RED + "Something went wrong while going to the home, please try again. If the error persists, contact an Admin.");
+
+            Okaerinasai.getInstance().getLogger().warning("Failed to teleport " + player.getName() + "|" + player.getUniqueId() + " to " + warpLabel + " warp");
             e.printStackTrace();
             return false;
         }
@@ -84,7 +85,7 @@ public class HomeCommand implements CommandExecutor {
             player.sendMessage("Okaerinasai, goshujin-sama!!!");
             return true;
         } else {
-            player.sendMessage(ChatColor.RED + "Something went wrong while going to your home, please try again. If the error persists, contact an Admin.");
+            player.sendMessage(ChatColor.RED + "Something went wrong while going to the warp, please try again. If the error persists, contact an Admin.");
             return false;
         }
     }

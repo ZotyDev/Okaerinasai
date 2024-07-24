@@ -1,4 +1,6 @@
-cooldown: 10
+home-cooldown: 5.0
+warp-cooldown: 10.0
 particle: ENCHANT
 particle-amount: 20
 default-home: home
+default-warp: warp
