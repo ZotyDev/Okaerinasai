@@ -32,6 +32,7 @@ public class Database {
         return this.connection;
     }
 
+    // Initializes the database by making sure all required tables exist.
     public void initializeDatabase() throws SQLException {
         Statement statement = this.getConnection().createStatement();
         String sqlPlayer = "CREATE TABLE IF NOT EXISTS player (" +

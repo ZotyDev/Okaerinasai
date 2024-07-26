@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WarpModel {
+    // Insert a warp into the database. If the home's dimension or coordinates change (overwriting an already existing
+    // warp) the entry will be updated.
     public static void insertWarp(String label, String dimension, double x, double y, double z) throws SQLException {
         String sql = "INSERT INTO warp (label, dimension, x, y, z) " +
                 "VALUES (?, ?, ?, ?, ?) " +
@@ -27,6 +29,7 @@ public class WarpModel {
         statement.close();
     }
 
+    // Delete a warp from the database based on the warp's label.
     public static void deleteWarp(String label) throws SQLException {
         String sql = "DELETE " +
                 "FROM warp " +
@@ -38,6 +41,7 @@ public class WarpModel {
         statement.close();
     }
 
+    // Returns the location of a warp based on its label
     public static Location getWarpLocation(String label) throws SQLException {
         String sql = "SELECT dimension, x, y, z " +
                 "FROM warp " +
@@ -60,6 +64,7 @@ public class WarpModel {
         }
     }
 
+    // Returns the number of warps.
     public static int getNumberOfWarps() throws SQLException {
         String sql = "SELECT COUNT(*) " +
                 "FROM warp;";
@@ -75,6 +80,7 @@ public class WarpModel {
         }
     }
 
+    // Returns a List<String> containing all the warp labels.
     public static List<String> getWarpLabels() throws SQLException {
         String sql = "SELECT label " +
                 "FROM warp;";

@@ -10,6 +10,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import java.sql.SQLException;
 
 public class PlayerJoinListener implements Listener {
+    // Register all players on the database.
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();

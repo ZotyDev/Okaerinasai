@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HomeModel {
+    // Insert a home into the database. If the home's dimension or coordinates change (overwriting an already existing
+    // home) the entry will be updated.
     public static void insertHome(String label, String uuidPlayer, String dimension, double x, double y, double z) throws SQLException {
         String sql = "INSERT INTO home (label, uuid_player, dimension, x, y, z) " +
                 "VALUES (?, ?, ?, ?, ?, ?) " +
@@ -28,6 +30,7 @@ public class HomeModel {
         statement.close();
     }
 
+    // Delete a home from the database based on the home's label and its owner.
     public static void deleteHome(String label, String uuidPlayer) throws SQLException {
         String sql = "DELETE " +
                 "FROM home " +
@@ -40,6 +43,7 @@ public class HomeModel {
         statement.close();
     }
 
+    // Return the location of a home based on its label and its owner.
     public static Location getHomeLocation(String label, String uuidPlayer) throws SQLException {
         String sql = "SELECT dimension, x, y, z " +
                 "FROM home " +
@@ -64,6 +68,7 @@ public class HomeModel {
         }
     }
 
+    // Returns the number of homes of a specific player.
     public static int getNumberOfHomes(String uuidPlayer) throws SQLException {
         String sql = "SELECT COUNT(*) " +
                 "FROM home " +
@@ -81,6 +86,7 @@ public class HomeModel {
         }
     }
 
+    // Returns a List<String> containing all the home labels of a specific player.
     public static List<String> getHomeLabels(String uuidPlayer) throws SQLException {
         String sql = "SELECT label " +
                 "FROM home " +
