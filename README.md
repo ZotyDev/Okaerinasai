@@ -1,4 +1,4 @@
-<a href="#">
+<a href="https://www.spigotmc.org/resources/okaerinasai.118378/">
   <p align="center">
     <img src="https://raw.githubusercontent.com/ZotyDev/Okaerinasai/main/branding/title.png" alt="Okaerinasai Title">
   </p>
