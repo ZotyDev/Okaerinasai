@@ -70,3 +70,6 @@ The database user, defaults to `default_db_user`.
 
 ## `db-password`
 The database password, defaults to `default_db_password`.
+
+## `arrive-text`
+The text that will be displayed when the player arrive to its destination, defaults to `Okaerinasai, goshujin-sama!!!`.

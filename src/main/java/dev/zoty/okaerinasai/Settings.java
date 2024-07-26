@@ -1,5 +1,6 @@
 package dev.zoty.okaerinasai;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Particle;
 
 public class Settings {
@@ -21,6 +22,8 @@ public class Settings {
     private static final String DEFAULT_DB_USER = "default_db_user";
     private static final String DB_PASSWORD = "db-password";
     private static final String DEFAULT_DB_PASSWORD = "default_db_password";
+    private static final String ARRIVE_TEXT = "arrive-text";
+    private static final String DEFAULT_ARRIVE_TEXT = ChatColor.GOLD + "" + ChatColor.ITALIC + "Okaerinasai, goshujin-sama!!!";
 
     public static float getHomeCooldown() {
         return ((Double) Okaerinasai.getInstance().getConfig().getDouble(HOME_COOLDOWN, DEFAULT_HOME_COOLDOWN)).floatValue();
@@ -70,5 +73,9 @@ public class Settings {
 
     public static String getDbPassword() {
         return Okaerinasai.getInstance().getConfig().getString(DB_PASSWORD, DEFAULT_DB_PASSWORD);
+    }
+
+    public static String getArriveText() {
+        return Okaerinasai.getInstance().getConfig().getString(ARRIVE_TEXT, DEFAULT_ARRIVE_TEXT);
     }
 }

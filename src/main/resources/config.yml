@@ -7,3 +7,4 @@ default-warp: warp
 db-url: default_db_url
 db-user: default_db_root
 db-password: default_db_password
+arrive-text: Okaerinasai, goshujin-sama!!!

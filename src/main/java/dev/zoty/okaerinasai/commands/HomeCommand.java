@@ -81,7 +81,7 @@ public class HomeCommand implements CommandExecutor {
 
     private boolean teleport(Player player, Location location) {
         if (Teleportation.teleportAndPlayEffects(player, location)) {
-            player.sendMessage("Okaerinasai, goshujin-sama!!!");
+            player.sendMessage(Settings.getArriveText());
             return true;
         } else {
             player.sendMessage(ChatColor.RED + "Something went wrong while going to your home, please try again. If the error persists, contact an Admin.");
